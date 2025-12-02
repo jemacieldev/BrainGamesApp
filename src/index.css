@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global adjustments */
+html, body, #root { height: 100%; }
+body { @apply bg-softGray text-gray-800 antialiased; }
+
+/* Custom small components */
+.btn-primary {
+  @apply px-5 py-2 rounded-full bg-primary text-white shadow;
+}
+.card {
+  @apply bg-white rounded-xl shadow p-4;
+}
+.pill {
+  @apply inline-block px-4 py-2 rounded-full border;
+}
