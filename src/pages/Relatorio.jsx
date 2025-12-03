@@ -36,7 +36,7 @@ export default function Relatorio({ results = [], clearResults }) {
     return results.slice().reverse();
   }, [results, filter, user]);
 
-  // aggregation per game
+
   const aggByGame = useMemo(() => {
     const map = {};
     (filtered || []).forEach(r => {
