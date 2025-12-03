@@ -8,19 +8,19 @@ const GAMES = [
     id: 'matematica', 
     title: 'Matemática', 
     desc: 'Operações e raciocínio rápido',
-    img: '/matematica.webp'
+    img: '/matematica.png'
   },
   { 
     id: 'alfabetizacao', 
     title: 'Alfabetização', 
     desc: 'Letras, sílabas e leitura',
-    img: '/alfabetizacao.webp'
+    img: '/alfabetizacao.png'
   },
   { 
     id: 'logico', 
     title: 'Raciocínio Lógico', 
     desc: 'Padrões, sequências e lógica',
-    img: '/logico.webp'
+    img: '/logico.png'
   },
 ]
 

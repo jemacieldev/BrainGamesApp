@@ -11,7 +11,7 @@ export default function AlfabetizacaoInfo() {
       <Voltar />
 
       <img
-        src="/alfabetizacao.webp"
+        src="/alfabetizacao.png"
         alt="Alfabetização"
         className="w-28 h-28 object-cover rounded-full mx-auto mb-4"
       />

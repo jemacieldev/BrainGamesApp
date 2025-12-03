@@ -11,7 +11,7 @@ export default function MatematicaInfo() {
       <Voltar />
 
       <img
-        src="/matematica.webp"
+        src="/matematica.png"
         alt="Matemática"
         className="w-28 h-28 object-cover rounded-full mx-auto mb-4"
       />

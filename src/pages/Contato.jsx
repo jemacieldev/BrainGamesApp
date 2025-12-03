@@ -34,7 +34,7 @@ export default function Contato() {
 
       <div className="flex flex-col items-center mb-8">
         <img
-          src="/public/contato.png"
+          src="/contato.png"
           alt="Contato"
           className="w-32 h-32 object-cover rounded-full shadow-md border"
         />

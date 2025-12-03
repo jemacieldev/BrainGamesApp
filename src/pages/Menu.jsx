@@ -39,10 +39,10 @@ export default function Menu() {
     : "Acesse sua conta";
 
   const avatarSrc = user && user.role === "aluno"
-    ? "/public/aluno.png"
+    ? "/aluno.png"
     : user && user.role === "educador"
-      ? "/public/educador.png"
-      : "/public/aluno.png";
+      ? "/educador.png"
+      : "/aluno.png";
 
   return (
     <div className="py-6 px-4 max-w-4xl mx-auto">

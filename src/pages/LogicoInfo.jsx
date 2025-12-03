@@ -11,7 +11,7 @@ export default function LogicoInfo() {
     <Voltar />
 
       <img
-        src="/logico.webp"
+        src="/logico.png"
         alt="Raciocínio Lógico"
         className="w-28 h-28 object-cover rounded-full mx-auto mb-4"
       />

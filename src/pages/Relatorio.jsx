@@ -100,7 +100,7 @@ export default function Relatorio({ results = [], clearResults }) {
       {/* Imagem no topo + botão voltar */}
       <div className="flex flex-col items-center mb-6 text-center">
         <img
-          src="/public/relatorio.png"
+          src="/relatorio.png"
           alt="Relatório BrainGames"
           className="w-32 h-32 object-cover rounded-full shadow-md border"
         />
