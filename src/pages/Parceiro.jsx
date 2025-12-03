@@ -10,7 +10,7 @@ export default function Parceiro() {
 
       <div className="flex flex-col items-center mb-8">
         <img
-          src="/public/kids.webp"
+          src="/public/kids.png"
           alt="Casa do Zezinho"
           className="w-36 h-36 object-cover rounded-full shadow-md border"
         />

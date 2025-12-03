@@ -47,7 +47,7 @@ export default function Resultado({ clearResults }) {
 
         <div className="mb-4">
           <div className="inline-block rounded-full shadow">
-            <img src="/medalha.webp" alt="Medalha" className="w-30 h-40 object-contain" />
+            <img src="/medalha.png" alt="Medalha" className="w-30 h-40 object-contain" />
           </div>
         </div>
 

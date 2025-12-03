@@ -11,7 +11,7 @@ export default function Sobre() {
       
       <div className="flex flex-col items-center mb-8 text-center">
         <img
-          src="/public/sobre.webp"
+          src="/public/sobre.png"
           alt="Sobre o projeto BrainGames"
           className="w-32 h-32 object-cover rounded-full shadow-md border"
         />
