@@ -1,24 +1,26 @@
+// src/pages/Jogos.jsx
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import Voltar from '../components/Voltar'
 
 const GAMES = [
   { 
     id: 'matematica', 
     title: 'Matemática', 
     desc: 'Operações e raciocínio rápido',
-    img: '/public/matematica.webp'
+    img: '/matematica.webp'
   },
   { 
     id: 'alfabetizacao', 
     title: 'Alfabetização', 
     desc: 'Letras, sílabas e leitura',
-    img: '/public/alfabetizacao.webp'
+    img: '/alfabetizacao.webp'
   },
   { 
     id: 'logico', 
     title: 'Raciocínio Lógico', 
     desc: 'Padrões, sequências e lógica',
-    img: '/public/logico.webp'
+    img: '/logico.webp'
   },
 ]
 
@@ -26,8 +28,11 @@ export default function Jogos() {
   const navigate = useNavigate()
 
   return (
-    <div className="py-6">
-    <h2 className="text-xl font-bold mb-4 text-center uppercase">Jogos</h2>
+    <div className="py-6 max-w-4xl mx-auto">
+      {/* BOTÃO VOLTAR */}
+      <Voltar to="/menu" />
+
+      <h2 className="text-xl font-bold mb-4 text-center uppercase">Jogos</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {GAMES.map(g => (
@@ -54,7 +59,7 @@ export default function Jogos() {
 
             {/* BOTÃO CENTRALIZADO */}
             <button 
-              onClick={() => navigate(`/jogo/${g.id}`)} 
+              onClick={() => navigate(`/jogo/${g.id}-info`)}
               className="btn-primary mt-auto"
             >
               Acessar

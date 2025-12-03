@@ -1,14 +1,26 @@
+// src/App.jsx
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import Header from './components/Header'
 import Footer from './components/Footer'
+
 import Home from './pages/Home'
 import Login from './pages/Login'
-import Menu from './pages/Menu'
+import Menu from './pages/Menu'       
 import Jogos from './pages/Jogos'
 import Jogo from './pages/Jogo'
 import Resultado from './pages/Resultado'
 import Relatorio from './pages/Relatorio'
+import Sobre from './pages/Sobre'     
+import Parceiro from './pages/Parceiro'
+import Contato from './pages/Contato' 
+import RelatorioTurma from './pages/RelatorioTurma'
+import GerenciarTurmas from './pages/GerenciarTurmas'
+import MatematicaInfo from "./pages/MatematicaInfo";
+import AlfabetizacaoInfo from "./pages/AlfabetizacaoInfo";
+import LogicoInfo from "./pages/LogicoInfo";
+
 
 export default function App(){
   const [results, setResults] = useState(() => {
@@ -36,6 +48,7 @@ export default function App(){
     <BrowserRouter>
       <div className="min-h-screen flex flex-col">
         <Header />
+        
         <main className="container mx-auto px-4 py-8 flex-1">
           <Routes>
             <Route path='/' element={<Home />} />
@@ -45,8 +58,17 @@ export default function App(){
             <Route path='/jogo/:id' element={<Jogo registerResult={registerResult} />} />
             <Route path='/resultado' element={<Resultado results={results} clearResults={clearResults} />} />
             <Route path='/relatorio' element={<Relatorio results={results} />} />
+            <Route path='/parceiro' element={<Parceiro />} />
+            <Route path='/contato' element={<Contato />} />
+            <Route path='/sobre' element={<Sobre />} />
+            <Route path='/relatorio-turma' element={<RelatorioTurma results={results} />} />
+            <Route path='/gerenciar-turmas' element={<GerenciarTurmas />} />
+            <Route path="/jogo/matematica-info" element={<MatematicaInfo />} />
+            <Route path="/jogo/alfabetizacao-info" element={<AlfabetizacaoInfo />} />
+            <Route path="/jogo/logico-info" element={<LogicoInfo />} />
           </Routes>
         </main>
+
         <Footer />
       </div>
     </BrowserRouter>
