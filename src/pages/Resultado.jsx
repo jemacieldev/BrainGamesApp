@@ -1,6 +1,7 @@
 // src/pages/Resultado.jsx
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import Voltar from "../components/Voltar";
 
 function getFromLocalFallback() {
   try {
@@ -24,7 +25,7 @@ export default function Resultado({ clearResults }) {
   const correct = sessionResults.filter(r => r.correct).length;
   const pct = total ? Math.round((correct / total) * 10000) / 100 : 0;
 
-  function handleMenu() {
+  function handleRetry() {
     navigate("/menu");
   }
 
@@ -32,24 +33,30 @@ export default function Resultado({ clearResults }) {
     navigate("/relatorio");
   }
 
-  function handleRetry() {
-    navigate("/menu");
-  }
-
   const allCorrect = total > 0 && correct === total;
   const noneAttempted = total === 0;
   const hasErrors = total > 0 && correct < total;
 
   return (
-    <div className="py-6 text-center">
-      <h2 className="text-2xl font-bold mb-4">
+    <div className="py-6 text-center relative">
+
+      {/* BOTÃO VOLTAR OFICIAL */}
+      <div className="absolute top-4 left-4">
+        <Voltar />
+      </div>
+
+      <h2 className="text-2xl font-bold mb-8">
         {noneAttempted ? "Resultado" : allCorrect ? "Parabéns!" : "Boa tentativa!"}
       </h2>
 
-      <div className="max-w-xs mx-auto bg-white p-6 rounded-xl shadow">
+      <div className="max-w-md mx-auto bg-white p-6 rounded-x1 shadow">
+
+        {/* TEXTO PRINCIPAL */}
         <div className="text-center mb-4">
           {noneAttempted ? (
-            <div className="text-gray-600">Ainda não houve tentativas neste jogo.</div>
+            <div className="text-gray-600">
+              Ainda não houve tentativas neste jogo.
+            </div>
           ) : (
             <div>
               Você acertou <strong>{correct}</strong> de <strong>{total}</strong>
@@ -57,69 +64,80 @@ export default function Resultado({ clearResults }) {
           )}
         </div>
 
-        {/* Medalha ou outra imagem padrão */}
+        {/* IMAGEM — MEDALHA QUANDO ACERTA / IMAGEM DE ERRO QUANDO ERRA */}
         <div className="mb-4">
-          <div className="inline-block rounded-full shadow">
-            <img src="/medalha.png" alt="Medalha" className="w-30 h-40 object-contain" />
+          <div className="inline-block rounded-xl shadow">
+            {allCorrect ? (
+              <img
+                src="/medalha.png"
+                alt="Medalha"
+                className="w-30 h-40 object-contain"
+              />
+            ) : (
+              <img
+                src="/pensando.png" // Altere para sua imagem de erro
+                alt="Tente novamente"
+                className="w-30 h-40 object-contain"
+              />
+            )}
           </div>
         </div>
 
+        {/* PORCENTAGEM */}
         <div className="mb-3">
           <div className="text-sm text-gray-500">Taxa de acerto</div>
           <div className="text-xl font-semibold">{pct}%</div>
         </div>
 
-        {/* MENSAGEM MOTIVACIONAL */}
+        {/* MENSAGENS DE MOTIVAÇÃO (sem emojis e sem travessão) */}
         <div className="mb-4">
           {noneAttempted && (
             <div className="text-sm text-gray-600">
-              Vamos começar? Clique em Menu para escolher um jogo.
+              Vamos começar? Tente responder uma pergunta.
             </div>
           )}
 
           {allCorrect && (
             <div className="text-sm text-green-600">
-              Excelente! Você acertou tudo — continue assim! 🎉
+              Excelente. Você acertou tudo. Continue assim.
             </div>
           )}
 
           {hasErrors && (
             <div className="text-sm text-yellow-700">
-              Muito bom esforço! Se algumas questões ficaram difíceis, tudo bem —
-              tente de novo para melhorar sua pontuação. Você consegue! 💪
+              Muito bom esforço. Continue tentando para melhorar cada vez mais. Você consegue.
             </div>
           )}
         </div>
 
-        {/* ----------------------------- */}
-        {/*  NOVO BLOCO: IMAGEM EDUCATIVA */}
-        {/* ----------------------------- */}
+        {/* DICA EDUCATIVA */}
         {hasErrors && (
-          <div className="mb-5">
-            <img
-              src="/public/pensando.png"
-              alt="Dica educativa"
-              className="w-full rounded-xl shadow-md object-cover"
-            />
-            <div className="text-xs text-gray-500 mt-2">
-              Aqui vai uma dica educativa para ajudar você a aprender um pouco mais! 😊
-            </div>
+          <div className="bg-yellow-50 border rounded-lg p-3 text-sm text-gray-700 mb-4">
+            <strong>Dica educativa</strong><br />
+            Aqui vai uma dica educativa para ajudar você a aprender um pouco mais.
           </div>
         )}
+
+        {/* BOTÕES */}
         <div className="flex gap-3 justify-center">
+
+          {/* TENTAR NOVAMENTE só quando houver erro */}
           {hasErrors && (
-            <button onClick={handleRetry} className="px-4 py-2 rounded-full bg-primary text-white">
+            <button
+              onClick={handleRetry}
+              className="px-4 py-2 rounded-full bg-primary text-white"
+            >
               Tentar novamente
             </button>
           )}
 
-          <button onClick={handleMenu} className="px-4 py-2 rounded-full bg-white border">
-            Menu
-          </button>
-
-          <button onClick={handleViewReport} className="px-4 py-2 rounded-full bg-primary text-white">
+          <button
+            onClick={handleViewReport}
+            className="px-4 py-2 rounded-full bg-primary text-white"
+          >
             Ver relatório
           </button>
+
         </div>
       </div>
     </div>
