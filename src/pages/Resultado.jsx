@@ -7,19 +7,30 @@ function getFromLocalFallback() {
   try {
     const s = localStorage.getItem("bg_results");
     return s ? JSON.parse(s) : [];
-  } catch { return []; }
+  } catch {
+    return [];
+  }
 }
 
-export default function Resultado({ clearResults }) {
+// Função que pega SOMENTE a última partida jogada
+function getLatestSession(results) {
+  if (!results || results.length === 0) return [];
+
+  const reversed = [...results].reverse();
+  const latestGameId = reversed[0].gameId;
+
+  // retorna todas as tentativas da partida mais recente
+  return reversed.filter(r => r.gameId === latestGameId).reverse();
+}
+
+export default function Resultado() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const currentGameId = location.state?.gameId || null;
   const all = getFromLocalFallback();
 
-  const sessionResults = currentGameId
-    ? all.filter(r => r.gameId === currentGameId)
-    : all;
+  // pega apenas a última partida
+  const sessionResults = getLatestSession(all);
 
   const total = sessionResults.length;
   const correct = sessionResults.filter(r => r.correct).length;
@@ -49,7 +60,7 @@ export default function Resultado({ clearResults }) {
         {noneAttempted ? "Resultado" : allCorrect ? "Parabéns!" : "Boa tentativa!"}
       </h2>
 
-      <div className="max-w-md mx-auto bg-white p-6 rounded-x1 shadow">
+      <div className="max-w-md mx-auto bg-white p-6 rounded-xl shadow">
 
         {/* TEXTO PRINCIPAL */}
         <div className="text-center mb-4">
@@ -64,7 +75,7 @@ export default function Resultado({ clearResults }) {
           )}
         </div>
 
-        {/* IMAGEM — MEDALHA QUANDO ACERTA / IMAGEM DE ERRO QUANDO ERRA */}
+        {/* IMAGEM — MEDALHA QUANDO ACERTA / IMAGEM EDUCATIVA QUANDO ERRA */}
         <div className="mb-4">
           <div className="inline-block rounded-xl shadow">
             {allCorrect ? (
@@ -75,7 +86,7 @@ export default function Resultado({ clearResults }) {
               />
             ) : (
               <img
-                src="/pensando.png" // Altere para sua imagem de erro
+                src="/pensando.png"
                 alt="Tente novamente"
                 className="w-30 h-40 object-contain"
               />
@@ -89,11 +100,11 @@ export default function Resultado({ clearResults }) {
           <div className="text-xl font-semibold">{pct}%</div>
         </div>
 
-        {/* MENSAGENS DE MOTIVAÇÃO (sem emojis e sem travessão) */}
+        {/* MENSAGENS (sem emojis / sem travessão) */}
         <div className="mb-4">
           {noneAttempted && (
             <div className="text-sm text-gray-600">
-              Vamos começar? Tente responder uma pergunta.
+              Vamos começar? Responda uma pergunta para ver seu desempenho.
             </div>
           )}
 
@@ -121,7 +132,7 @@ export default function Resultado({ clearResults }) {
         {/* BOTÕES */}
         <div className="flex gap-3 justify-center">
 
-          {/* TENTAR NOVAMENTE só quando houver erro */}
+          {/* TENTAR NOVAMENTE apenas quando houver erro */}
           {hasErrors && (
             <button
               onClick={handleRetry}
