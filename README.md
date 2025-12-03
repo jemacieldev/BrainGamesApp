@@ -1,39 +1,72 @@
-# BrainGames
 
-Aplicação educativa criada com React + Vite + Tailwind.
 
-## Como usar localmente (VSCode)
+# 🎮 BrainGames — Plataforma de Jogos Educacionais com Propósito Social
 
-1. Abra o VSCode e copie a pasta do projeto para sua máquina.
-2. Abra o terminal na raiz do projeto e rode:
+🔗 **Acesse o projeto online:**  
+https://brain-games-app-mu.vercel.app/
 
+O **BrainGames** é uma plataforma digital desenvolvida como projeto do PIME (Projeto Integrador Multidisciplinar) do curso de ADS — Belas Artes, com foco em **inclusão educacional**, **gamificação** e **desenvolvimento cognitivo** de crianças entre 7 e 12 anos.
+
+O sistema foi projetado especialmente para instituições sociais que necessitam de ferramentas simples, leves e gratuitas para apoiar processos pedagógicos.
+
+---
+
+## 🚀 Tecnologias Utilizadas
+
+- **React.js** — frontend leve e rápido  
+- **JavaScript** — linguagem principal  
+- **TailwindCSS** — estilização responsiva  
+- **Firebase (planejado)**  
+  - Auth  
+  - Firestore  
+  - Storage  
+- **Vercel** — hospedagem do MVP  
+- **Figma** — prototipação  
+
+---
+
+## 📱 Funcionalidades Principais
+
+- Menu com jogos cognitivos  
+- Feedback educativo imediato  
+- Registro de desempenho  
+- Relatórios individuais e por turma  
+- Interface acessível e responsiva  
+- Página da entidade parceira  
+- Mensagens motivadoras  
+- Testes preliminares com crianças (Sprint 2)  
+
+---
+
+## 🧩 Estrutura das Telas
+
+- Tela Inicial  
+- Login  
+- Menu  
+- Jogos  
+- Resultado  
+- Relatório  
+- Sobre  
+- Parceiro  
+- Contato  
+
+---
+
+## 🖼️ Screenshots
+
+### Tela Inicial
+![Tela Inicial](public/screenshot1.png)
+
+### Jogo
+![Jogo](public/screenshot2.png)
+
+### Relatório
+![Relatório](public/screenshot3.png)
+
+---
+
+## 🛠️ Como Executar o Projeto Localmente
+
+### 1. Clonar o repositório
 ```bash
-npm install
-npm run dev
-```
-
-3. Acesse `http://localhost:5173`.
-
-## Notas técnicas
-- Projeto usa Tailwind v4 (config em `tailwind.config.cjs`).
-- Estado de resultados é salvo em `localStorage` (chave `bg_results`).
-
-## Responsividade
-- Layout responsivo usando classes utilitárias do Tailwind (`grid`, `sm:`, `lg:` etc.).
-
-## Deploy na Vercel
-1. Crie um repositório (GitHub/GitLab/Bitbucket) e faça push do projeto.
-2. Em Vercel, clique em "New Project" > import repository.
-3. Vercel detecta Vite automaticamente. Use o comando de build:
-
-```
-npm run build
-```
-
-Diretório de saída: `dist` (padrão Vite).
-
-## Dicas de produção
-- Use Node versão LTS (recomenda-se >= 20).
-- Atualize dependências periodicamente.
-- Para backend ou APIs, crie um micro-serviço separado (Node/Express / Firebase Functions).
-
+git clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
