@@ -12,7 +12,7 @@ function getFromLocalFallback() {
   }
 }
 
-// Função que pega SOMENTE a última partida jogada
+// Função que pega SOMENTE a última partida jogada (fallback)
 function getLatestSession(results) {
   if (!results || results.length === 0) return [];
 
@@ -29,8 +29,19 @@ export default function Resultado() {
 
   const all = getFromLocalFallback();
 
-  // pega apenas a última partida
-  const sessionResults = getLatestSession(all);
+  // PRIMEIRA PRIORIDADE: sessões ativas armazenadas explicitamente (recomendado)
+  const storedSession = (() => {
+    try {
+      return JSON.parse(localStorage.getItem("bg_current_session")) || null;
+    } catch {
+      return null;
+    }
+  })();
+
+  // Se existe sessão corrente, usa ela; caso contrário, tenta inferir a última sessão do histórico
+  const sessionResults = Array.isArray(storedSession) && storedSession.length > 0
+    ? storedSession
+    : getLatestSession(all);
 
   const total = sessionResults.length;
   const correct = sessionResults.filter(r => r.correct).length;
@@ -65,13 +76,9 @@ export default function Resultado() {
         {/* TEXTO PRINCIPAL */}
         <div className="text-center mb-4">
           {noneAttempted ? (
-            <div className="text-gray-600">
-              Ainda não houve tentativas neste jogo.
-            </div>
+            <div className="text-gray-600">Ainda não houve tentativas neste jogo.</div>
           ) : (
-            <div>
-              Você acertou <strong>{correct}</strong> de <strong>{total}</strong>
-            </div>
+            <div>Você acertou <strong>{correct}</strong> de <strong>{total}</strong></div>
           )}
         </div>
 
@@ -79,17 +86,9 @@ export default function Resultado() {
         <div className="mb-4">
           <div className="inline-block rounded-xl shadow">
             {allCorrect ? (
-              <img
-                src="/medalha.png"
-                alt="Medalha"
-                className="w-30 h-40 object-contain"
-              />
+              <img src="/medalha.png" alt="Medalha" className="w-30 h-40 object-contain" />
             ) : (
-              <img
-                src="/pensando.png"
-                alt="Tente novamente"
-                className="w-30 h-40 object-contain"
-              />
+              <img src="/pensando.png" alt="Tente novamente" className="w-30 h-40 object-contain" />
             )}
           </div>
         </div>
@@ -103,15 +102,11 @@ export default function Resultado() {
         {/* MENSAGENS (sem emojis / sem travessão) */}
         <div className="mb-4">
           {noneAttempted && (
-            <div className="text-sm text-gray-600">
-              Vamos começar? Responda uma pergunta para ver seu desempenho.
-            </div>
+            <div className="text-sm text-gray-600">Vamos começar? Responda uma pergunta para ver seu desempenho.</div>
           )}
 
           {allCorrect && (
-            <div className="text-sm text-green-600">
-              Excelente. Você acertou tudo. Continue assim.
-            </div>
+            <div className="text-sm text-green-600">Excelente. Você acertou tudo. Continue assim.</div>
           )}
 
           {hasErrors && (
@@ -131,26 +126,15 @@ export default function Resultado() {
 
         {/* BOTÕES */}
         <div className="flex gap-3 justify-center">
-
           {/* TENTAR NOVAMENTE apenas quando houver erro */}
           {hasErrors && (
-            <button
-              onClick={handleRetry}
-              className="px-4 py-2 rounded-full bg-primary text-white"
-            >
-              Tentar novamente
-            </button>
+            <button onClick={handleRetry} className="px-4 py-2 rounded-full bg-primary text-white">Tentar novamente</button>
           )}
 
-          <button
-            onClick={handleViewReport}
-            className="px-4 py-2 rounded-full bg-primary text-white"
-          >
-            Ver relatório
-          </button>
-
+          <button onClick={handleViewReport} className="px-4 py-2 rounded-full bg-primary text-white">Ver relatório</button>
         </div>
       </div>
     </div>
   );
 }
+
